@@ -12,7 +12,7 @@ For about 25 years, Japan's prices barely moved, and at times they fell. Since 2
 
 Before my exchange I worked as a data-analysis intern, where I learned the data-science side of the work. This project is where I combine it with what I study: econometrics and time series. Research Paper I this course at Otaru University of Commerce gave me the chance to do it properly, with weekly supervision with Prof Ikeda.
 
-## Reserach Quentions
+## Research Quentions
 
 The IMF (Liu, Pan and Xu, 2024, WP/24/206) notes that Japanese inflation has become harder to forecast, but does not test whether a lasting change has taken place. This project starts from that paper and asks:
 
@@ -52,11 +52,11 @@ Instructions for each analysis step will be added as the code is written.
 
 ## Data
 
-All data come from official sources: the Statistics Bureau of Japan, the Bank of Japan, the Cabinet Office, the Ministry of Health, Labour and Welfare and others.In [data/README.md](data/README.md). Raw files are kept unchanged.
+All data come from official sources: the Statistics Bureau of Japan, the Bank of Japan, the Cabinet Office, the Ministry of Health, Labour and Welfare and others. Sources and licences are listed in data/README.md. Raw files are kept unchanged.
 
 ## About Me
 
-Undergraduate research paper by **Tay Tze Ping**, supervised at Otaru University of Commerce (OUC), Japan, for Research Paper I. I am on exchange from the University of Malaya (Economics, Applied Statistics), October 2026 to February 2027.
+Undergraduate research paper by **Tay Tze Ping**, Research Paper I at Otaru University of Commerce, supervised weekly by Professor Ikeda, gave me the chance to do it properly. I am on exchange from the University of Malaya (Economics, Applied Statistics), October 2026 to February 2027.
 
 ## Licence
 
