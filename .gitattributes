@@ -1,0 +1,2 @@
+# Keep raw data exactly as downloaded (no line-ending changes)
+data/raw/** -text
