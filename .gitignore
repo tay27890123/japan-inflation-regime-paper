@@ -218,3 +218,23 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- Project additions (paste at the end of .gitignore) ---
+# Built by code, never committed
+data/processed/*
+!data/processed/.gitkeep
+
+# Raw files whose licence is not confirmed: keep out of the public repository
+data/raw/jnto_*
+data/raw/SSR_Estimates_*
+data/raw/SPASTT01JPM661N*
+
+# Secrets and private notes
+.env
+*.key
+private/
+
+# OS and editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini

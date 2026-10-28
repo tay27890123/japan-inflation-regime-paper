@@ -1,0 +1,12 @@
+numpy
+pandas
+openpyxl
+xlrd
+scipy
+matplotlib
+requests
+statsmodels==0.15.0
+scikit-learn
+xtbreak==0.1.1
+jupyter
+pytest
