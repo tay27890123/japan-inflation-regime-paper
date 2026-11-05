@@ -10,7 +10,7 @@ For about 25 years, Japan's prices barely moved, and at times they fell. Since 2
 
 <img alt="Japan's core-core inflation, 1995 to 2026: near zero for 25 years, mostly at or above 2% since 2022" src="results/figures/core_core_inflation_light.png">
 
-Before my exchange I worked as a data-analysis intern, where I learned the data-science side of the work. This project is where I combine it with what I study: econometrics and time series. Research Paper I at Otaru University of Commerce, with weekly supervision, gave me the chance to do it properly.
+Before my exchange I worked as a data-analysis intern, where I learned the data-science side of the work. This project is where I combine it with what I study: econometrics and time series. Research Paper I at Otaru University of Commerce, with weekly supervision from Professor Shinsuke Ikeda, gave me the chance to do it properly.
 
 ## Research Questions
 
@@ -64,7 +64,7 @@ Most data come from official sources: the Statistics Bureau of Japan, the Bank o
 
 ## About Me
 
-Undergraduate research paper by **Tay Tze Ping** for Research Paper I at Otaru University of Commerce. I am on exchange from the University of Malaya (Economics, Applied Statistics), September 2026 to February 2027.
+Undergraduate research paper by **Tay Tze Ping** for Research Paper I at Otaru University of Commerce, supervised by Professor Shinsuke Ikeda. I am on exchange from the University of Malaya (Economics, Applied Statistics), September 2026 to February 2027.
 
 ## Licence
 
