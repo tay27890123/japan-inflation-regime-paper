@@ -25,7 +25,7 @@ def main():
     target.index = target.index.to_timestamp()
     last = target.index[-1]
 
-    fig, ax = plt.subplots(figsize=(9, 4.5), dpi=150)
+    fig, ax = plt.subplots(figsize=(9, 5.2), dpi=150)
     ax.plot(official, color="gray", label="Official core-core CPI (unadjusted)")
     ax.plot(target, color="tab:blue", linewidth=2,
             label="Adjusted for tax rises and other government measures (this project)")
@@ -33,11 +33,25 @@ def main():
     ax.axhline(0, color="black", linewidth=0.5)
     ax.axvspan(pd.Timestamp("2022-01-01"), last, color="gray", alpha=0.12, label="Since 2022")  # shaded period
 
+    # Short labels for the main shocks: (month on the grey line, label, where the label goes)
+    events = [
+        ("1997-04", "1997: consumption tax rise (3% to 5%)", "2000-01", 3.6),
+        ("2008-10", "2008: oil and food price spike,\nthen global financial crisis", "2004-06", 2.6),
+        ("2014-04", "2014: consumption tax rise (5% to 8%)", "2010-06", 3.6),
+        ("2019-10", "2019: consumption tax rise (8% to 10%)", "2018-06", 1.7),
+        ("2021-04", "2021: mobile-phone fee cut", "2016-06", -1.3),
+    ]
+    for month, label, text_month, text_y in events:
+        x = pd.Timestamp(month)
+        ax.annotate(label, xy=(x, official[x]), xytext=(pd.Timestamp(text_month), text_y),
+                    fontsize=8, ha="center", va="center",
+                    arrowprops=dict(arrowstyle="-", color="gray", linewidth=0.8))
+
     ax.set_title(f"Japan's core-core inflation, 1995-{last.year} (% change on a year earlier)")
     ax.set_ylabel("%")
     ax.margins(x=0.01)  # no empty space at the left and right ends
     ax.grid(axis="y", alpha=0.3)
-    ax.legend(loc="upper left", frameon=False, fontsize=9)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.08), ncol=2, frameon=False, fontsize=9)  # below the chart
     fig.text(0.01, 0.01, f"Source: Statistics Bureau of Japan; Bank of Japan. Adjusted series: author's calculations. "
              f"Latest: {last:%b %Y}.", fontsize=7.5, color="gray")
     fig.tight_layout(rect=(0, 0.03, 1, 1))
@@ -49,3 +63,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
