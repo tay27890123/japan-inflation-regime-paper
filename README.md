@@ -2,7 +2,7 @@
 
 **Applying econometric and machine-learning models to forecasting Japanese inflation, 2007–2026**
 
-> **Status (October 2026):** research design finished and all data collected; now building the inflation series. This repository is updated as the research goes on. Follow the progress in the [research log](docs/research_log.md).
+> **Status (November 2026):** research design finished, all data collected, and the inflation series built and tested; now adding the predictors. This repository is updated as the research goes on. Follow the progress in the [research log](docs/research_log.md).
 
 ## Project Overview
 
@@ -10,9 +10,9 @@ For about 25 years, Japan's prices barely moved, and at times they fell. Since 2
 
 <img alt="Japan's core-core inflation, 1995 to 2026: near zero for 25 years, mostly at or above 2% since 2022" src="results/figures/core_core_inflation_light.png">
 
-Before my exchange I worked as a data-analysis intern, where I learned the data-science side of the work. This project is where I combine it with what I study: econometrics and time series. Research Paper I this course at Otaru University of Commerce gave me the chance to do it properly, with weekly supervision with Prof Ikeda.
+Before my exchange I worked as a data-analysis intern, where I learned the data-science side of the work. This project is where I combine it with what I study: econometrics and time series. Research Paper I at Otaru University of Commerce, with weekly supervision, gave me the chance to do it properly.
 
-## Research Quentions
+## Research Questions
 
 The IMF (Liu, Pan and Xu, 2024, WP/24/206) notes that Japanese inflation has become harder to forecast, but does not test whether a lasting change has taken place. This project starts from that paper and asks:
 
@@ -48,15 +48,23 @@ py -3.13 -m venv .venv
 pip install -r requirements.txt
 ```
 
-Instructions for each analysis step will be added as the code is written.
+Then, from the project folder:
+
+```
+python src/build_target.py    # builds the inflation series: data/processed/target.csv
+python src/plot_target.py     # redraws the chart above
+pytest                        # runs the automatic checks
+```
+
+Instructions for the later steps will be added as the code is written.
 
 ## Data
 
-All data come from official sources: the Statistics Bureau of Japan, the Bank of Japan, the Cabinet Office, the Ministry of Health, Labour and Welfare and others. Sources and licences are listed in data/README.md. Raw files are kept unchanged.
+Most data come from official sources: the Statistics Bureau of Japan, the Bank of Japan, the Cabinet Office and the Ministry of Health, Labour and Welfare. Three files come from other sources (tourist arrivals, the shadow interest rate and share prices) and are downloaded separately. Sources, licences and download steps are listed in [data/README.md](data/README.md). Raw files are kept unchanged.
 
 ## About Me
 
-Undergraduate research paper by **Tay Tze Ping**, Research Paper I at Otaru University of Commerce, supervised weekly by Professor Ikeda, gave me the chance to do it properly. I am on exchange from the University of Malaya (Economics, Applied Statistics), October 2026 to February 2027.
+Undergraduate research paper by **Tay Tze Ping** for Research Paper I at Otaru University of Commerce. I am on exchange from the University of Malaya (Economics, Applied Statistics), September 2026 to February 2027.
 
 ## Licence
 
