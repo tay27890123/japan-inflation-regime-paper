@@ -2,8 +2,6 @@
 
 **Applying econometric and machine-learning models to forecasting Japanese inflation, 2007–2026**
 
-> **Status (November 2026):** research design finished, all data collected, and the inflation series built and tested; now adding the predictors. This repository is updated as the research goes on. Follow the progress in the [research log](docs/research_log.md).
-
 ## Project Overview
 
 For about 25 years, Japan's prices barely moved, and at times they fell. Since 2022, core inflation has mostly stayed at or above 2%. I wanted to know whether this is a temporary shock or a real change, and what it means for anyone who has to forecast inflation.
@@ -23,19 +21,19 @@ The IMF (Liu, Pan and Xu, 2024, WP/24/206) notes that Japanese inflation has bec
 ## Approach
 
 - **Inflation measure:** core-core CPI (excluding fresh food and energy), adjusted for one-off government measures, such as consumption-tax increases, that distort the underlying trend. It joins the Statistics Bureau's tax-adjusted series (to 2015) with the Bank of Japan's adjusted series (from 2016).
-- **RQ1:** Bai–Perron structural-break tests, then four economic explanations from previous research: imported costs, firms' price-setting, wage–price feedback, and changes in economic relationships.
-- **RQ2:** out-of-sample forecasts from 2013 at 1, 3 and 6 months ahead. Models: random walk, autoregressive (AR), AR plus one group of economic indicators, and LASSO (following the IMF). Forecasts use only data published at the time. Comparisons use Diebold–Mariano and Giacomini–Rossi tests.
+- **RQ1:** Bai–Perron structural-break tests, then three economic explanations from previous research: imported costs, firms' price-setting and wage–price feedback.
+- **RQ2:** out-of-sample forecasts from 2013 at 1, 3 and 6 months ahead. Models: random walk, autoregressive (AR), AR plus one group of economic indicators, and LASSO (following the IMF). Forecasts use only data published at the time. Comparisons use the Diebold–Mariano test.
 - **RQ3:** expanding vs 10-year vs 5-year training windows.
 
 ## Repository structure
 
 ```
 data/        raw and processed data (sources and licences in data/README.md)
-src/         Python code
-tests/       automatic checks
-notebooks/   exploration and charts
+src/         Python code that builds the data
+tests/       automatic checks on the data
+notebooks/   the analysis: one notebook per step, in the paper's order
 results/     figures and tables
-docs/        research log and methodology
+docs/        research notes
 ```
 
 ## Reproducing the results
@@ -52,11 +50,12 @@ Then, from the project folder:
 
 ```
 python src/build_target.py    # builds the inflation series: data/processed/target.csv
+python src/build_dataset.py   # adds the 24 predictors: data/processed/dataset.csv
 python src/plot_target.py     # redraws the chart above
-pytest                        # runs the automatic checks
+python -m pytest              # checks the data
 ```
 
-Instructions for the later steps will be added as the code is written.
+Then open the notebooks in the `notebooks/` folder in order and run all cells.
 
 ## Data
 
