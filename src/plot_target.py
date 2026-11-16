@@ -18,7 +18,7 @@ OUT = ROOT / "results" / "figures" / "core_core_inflation_light.png"
 
 
 def main():
-    # The two series: official from 1995, our adjusted target from 2006
+    # The two series: official from 1995, the adjusted target from 2006
     official = read_official().loc["1995-01":]
     target = build_target()["target"]
     official.index = official.index.to_timestamp()  # monthly periods -> dates, for plotting
@@ -28,7 +28,7 @@ def main():
     fig, ax = plt.subplots(figsize=(9, 5.2), dpi=150)
     ax.plot(official, color="gray", label="Official core-core CPI (unadjusted)")
     ax.plot(target, color="tab:blue", linewidth=2,
-            label="Adjusted for tax rises and other government measures (this project)")
+            label="Adjusted for tax rises and other government measures (the target)")
     ax.axhline(2, color="black", linestyle="--", linewidth=1, label="2% (Bank of Japan target)")
     ax.axhline(0, color="black", linewidth=0.5)
     ax.axvspan(pd.Timestamp("2022-01-01"), last, color="gray", alpha=0.12, label="Since 2022")  # shaded period
@@ -52,7 +52,7 @@ def main():
     ax.margins(x=0.01)  # no empty space at the left and right ends
     ax.grid(axis="y", alpha=0.3)
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.08), ncol=2, frameon=False, fontsize=9)  # below the chart
-    fig.text(0.01, 0.01, f"Source: Statistics Bureau of Japan; Bank of Japan. Adjusted series: author's calculations. "
+    fig.text(0.01, 0.01, f"Source: Statistics Bureau of Japan; Bank of Japan. Adjusted series: the two official series, joined. "
              f"Latest: {last:%b %Y}.", fontsize=7.5, color="gray")
     fig.tight_layout(rect=(0, 0.03, 1, 1))
 
@@ -63,4 +63,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 

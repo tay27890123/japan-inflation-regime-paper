@@ -2,19 +2,23 @@
 
 Core-core CPI = consumer prices excluding fresh food and energy
 (Statistics Bureau item code 0178). Inflation = % change on a year earlier.
-Policy-adjusted = without the effects of government measures: consumption-tax
-rises, free education, travel subsidies and the 2021 mobile-phone fee cut.
+Policy-adjusted = without the effects of government measures, as the two
+official sources remove them: consumption-tax rises, and from 2016 also free
+education, travel subsidies and the 2021 mobile-phone fee cut.
 
-The target joins two official series:
+The target joins two official series. We do not change any number ourselves:
 
     Jan 2006 - Dec 2015   Statistics Bureau, adjusted for consumption tax
-                          (2025taxadj.xlsx, sheet "zmy"), plus our only fix:
-                          +0.6 pp in Apr 2010 - Mar 2011 (free high-school tuition)
+                          (2025taxadj.xlsx, sheet "zmy")
     Jan 2016 onward       Bank of Japan, excluding special factors (cpirev.xlsx)
 
 Where both series exist (Jan 2016 - Jul 2020) they are identical, so the join
 is seamless. The official unadjusted series (zmy2025a.csv) is kept next to the
 target for comparison.
+
+Known limit: free high-school tuition lowered inflation by about half a point
+from Apr 2010 to Mar 2011. Neither official series removes it for those months,
+so it stays in the target.
 
 Run from the project folder:
     python src/build_target.py
@@ -31,9 +35,7 @@ RAW = ROOT / "data" / "raw"
 OUT = ROOT / "data" / "processed" / "target.csv"
 
 CORE_CORE = "0178"  # Statistics Bureau code: all items less fresh food and energy
-START, JOIN = "2006-01", "2016-01"
-TUITION_FIX = 0.6  # pp; Statistics Bureau estimate, scaled to core-core
-TUITION_MONTHS = ("2010-04", "2011-03")
+START, JOIN = "2006-01", "2016-01"  # first month of the target; first month taken from the BOJ
 
 
 def _months(values):
@@ -87,15 +89,11 @@ def build_target():
     boj = read_boj()
     official = read_official()
 
-    early = sb.loc[START:"2015-12"].copy()
-    fix = pd.Series(0.0, index=early.index)
-    fix.loc[TUITION_MONTHS[0]:TUITION_MONTHS[1]] = TUITION_FIX
-    early = early + fix
-
-    target = pd.concat([early, boj.loc[JOIN:]]).round(1)
+    # Statistics Bureau up to Dec 2015, Bank of Japan from Jan 2016, both as published.
+    # round(1) changes no value: Excel stores 2.2 as 2.1999999999999997, and this tidies it.
+    target = pd.concat([sb.loc[START:"2015-12"], boj.loc[JOIN:]]).round(1)
     source = pd.Series("Bank of Japan, excluding special factors", index=target.index)
     source.loc[:"2015-12"] = "Statistics Bureau, tax-adjusted"
-    source.loc[TUITION_MONTHS[0]:TUITION_MONTHS[1]] = "Statistics Bureau, tax-adjusted, +0.6 tuition fix"
 
     out = pd.DataFrame({"target": target, "official": official.reindex(target.index), "source": source})
     out.index.name = "month"
@@ -114,3 +112,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

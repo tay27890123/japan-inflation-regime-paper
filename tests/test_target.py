@@ -1,7 +1,7 @@
 """Checks that the target is built correctly from the raw files.
 
 Run from the project folder:
-    pytest
+    python -m pytest
 """
 
 import sys
@@ -43,12 +43,10 @@ def test_join_step_matches_statistics_bureau(df, sb):
     assert round(step_target, 1) == round(step_sb, 1) == -0.3
 
 
-def test_tuition_fix_only_in_apr2010_to_mar2011(df, sb):
-    """Our only adjustment: +0.6 pp in Apr 2010 - Mar 2011, nothing elsewhere before 2016."""
-    added = (df.loc[:"2015-12", "target"] - sb.loc["2006-01":"2015-12"]).round(1)
-    fix_months = added.loc["2010-04":"2011-03"]
-    assert len(fix_months) == 12 and (fix_months == 0.6).all()
-    assert (added.drop(fix_months.index) == 0).all()
+def test_target_equals_statistics_bureau_before_2016(df, sb):
+    """No adjustment of our own: up to Dec 2015 the target is the Statistics Bureau's series, unchanged."""
+    assert len(df.loc[:"2015-12"]) == 120
+    assert (df.loc[:"2015-12", "target"] - sb.loc["2006-01":"2015-12"]).abs().max() < 1e-9
 
 
 def test_2014_tax_rise_removed(df):
@@ -78,14 +76,14 @@ def test_no_gaps(df):
 
 
 def test_differences_from_official_only_at_listed_events(df):
-    """Before Oct 2019, the target differs from the official series only in the 2010
-    tuition months and the 2014 tax months, apart from rounding (at most 0.1 pp).
-    From Oct 2019 the differences are the BOJ's own adjustments (tax, free education,
-    travel subsidies, mobile fees), taken as published."""
+    """Before Oct 2019, the target differs from the official series only in the 2014
+    tax months, apart from rounding (at most 0.1 pp). From Oct 2019 the differences
+    are the BOJ's own adjustments (tax, free education, travel subsidies, mobile fees),
+    taken as published."""
     diff = (df.loc[:"2019-09", "target"] - df.loc[:"2019-09", "official"]).round(1)
-    tuition = diff.loc["2010-04":"2011-03"]
     tax = diff.loc["2014-04":"2015-03"]
-    assert (tuition == 0.6).all()
     assert tax.between(-2.0, -1.8).all()
-    other = diff.drop(tuition.index).drop(tax.index).drop(pd.Period("2015-04", "M"))
+    # Apr 2015 holds the last 0.2 of the tax rise: water and phone bills were taxed one month late
+    other = diff.drop(tax.index).drop(pd.Period("2015-04", "M"))
     assert other.abs().max() <= 0.1
+
