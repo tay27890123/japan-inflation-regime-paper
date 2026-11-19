@@ -86,4 +86,3 @@ def test_differences_from_official_only_at_listed_events(df):
     # Apr 2015 holds the last 0.2 of the tax rise: water and phone bills were taxed one month late
     other = diff.drop(tax.index).drop(pd.Period("2015-04", "M"))
     assert other.abs().max() <= 0.1
-

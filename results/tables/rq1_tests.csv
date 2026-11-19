@@ -1,0 +1,8 @@
+series,test,sup_F,critical(5%),reject,break_dates
+level,0 vs 1 breaks,99.4,8.58,True,2022-07
+level,1 vs 2 breaks,11.6,10.13,True,"2013-10, 2022-08"
+level,2 vs 3 breaks,12.0,11.14,True,"2010-01, 2013-07, 2022-08"
+level,3 vs 4 breaks,5.6,11.83,False,
+volatility,0 vs 1 breaks,16.8,8.58,True,2022-03
+volatility,1 vs 2 breaks,12.2,10.13,True,"2014-01, 2022-03"
+volatility,2 vs 3 breaks,2.2,11.14,False,
