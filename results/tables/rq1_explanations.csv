@@ -1,0 +1,9 @@
+indicator,Before,"After, costs rising","After, costs eased"
+Target inflation (%),0.5,3.0,3.0
+1. Import prices (% YoY),3.8,28.2,1.0
+2. CPI diffusion index,22.1,64.7,63.1
+"2. Tankan price plans, all firms",0.4,33.4,32.7
+"2. Household expectations, 1 year (%)",4.4,9.2,11.3
+3. Shunto wage settlement (%),2.1,2.2,4.6
+3. Total cash earnings (% YoY),0.3,1.8,2.3
+"3. Tankan price plans, small service firms",0.5,30.5,33.3
